@@ -43,9 +43,11 @@ d3.json("./assets/json/output.json").then(data => {
     .text(function(d) { return d.properties.NAME })
 })
 
-g.call(d3.zoom().scaleExtent([1 / 2, 8]).on("zoom", () => {
+const zoom = d3.zoom().on("zoom", () => {
   g.attr('transform', d3.event.transform)
-}))
+})
+
+svg.call(zoom)
 
 function clicked(d) {
   console.log(d);
