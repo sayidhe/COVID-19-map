@@ -1,6 +1,6 @@
 var m_width = $("#map").width(),
   width = 960,
-  height = 800,
+  height = 400,
   centered;
 
 var projection = d3.geoMercator()
@@ -21,7 +21,6 @@ svg.append("rect")
   .attr("class", "background")
   .attr("width", width)
   .attr("height", height)
-  .on("click", clicked);
 
 var g = svg.append("g");
 
@@ -34,7 +33,6 @@ d3.json("./assets/json/output.json").then(data => {
       .enter().append("path")
       .attr("d", path)
       .attr("class", object)
-      .on("click", clicked);
   })
   g.selectAll(".place-label")
     .data(topojson.feature(data, data.objects.countries_min).features)
@@ -44,6 +42,10 @@ d3.json("./assets/json/output.json").then(data => {
     .attr("dy", ".35em")
     .text(function(d) { return d.properties.NAME })
 })
+
+g.call(d3.zoom().scaleExtent([1 / 2, 8]).on("zoom", () => {
+  g.attr('transform', d3.event.transform)
+}))
 
 function clicked(d) {
   console.log(d);
