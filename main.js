@@ -33,14 +33,15 @@ d3.json("./assets/json/output.json").then(data => {
       .enter().append("path")
       .attr("d", path)
       .attr("class", object)
+      .on("click", clicked)
   })
-  g.selectAll(".place-label")
-    .data(topojson.feature(data, data.objects.countries_min).features)
-    .enter().append("text")
-    .attr("class", "place-label")
-    .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
-    .attr("dy", ".35em")
-    .text(function(d) { return d.properties.NAME })
+  // g.selectAll(".place-label")
+  //   .data(topojson.feature(data, data.objects.countries_min).features)
+  //   .enter().append("text")
+  //   .attr("class", "place-label")
+  //   .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
+  //   .attr("dy", ".35em")
+  //   .text(function(d) { return d.properties.NAME })
 })
 
 const zoom = d3.zoom().on("zoom", () => {
@@ -51,6 +52,7 @@ svg.call(zoom)
 
 function clicked(d) {
   console.log(d);
+  console.log(d.properties.name_zh)
   var x, y, k;
 
   if (d && centered !== d) {
@@ -69,8 +71,8 @@ function clicked(d) {
   g.selectAll("path")
     .classed("active", centered && function (d) { return d === centered; });
 
-  g.transition()
-    .duration(750)
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-    .style("stroke-width", 1.5 / k + "px");
+  // g.transition()
+  //   .duration(750)
+  //   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+  //   .style("stroke-width", 1.5 / k + "px");
 }

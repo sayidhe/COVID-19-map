@@ -28,6 +28,11 @@ $ http-server . -p 8000
 # server runs on http://127.0.0.1:8000
 ```
 
+## 生成数据模版
+```bash
+$ npm run g:template
+```
+
 ## 参考
 
 - [Let’s Make a Map](https://bost.ocks.org/mike/map/)
