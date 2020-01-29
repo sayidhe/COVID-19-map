@@ -1,54 +1,12 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-  #map {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    overflow: hidden;
-  }
-
-  .background {
-    fill: none;
-    pointer-events: all;
-  }
-
-  #countries,
-  #states {
-    fill: #cde;
-    stroke: #fff;
-    stroke-linejoin: round;
-    stroke-linecap: round;
-  }
-
-  #countries .active,
-  #states .active {
-    fill: #89a;
-  }
-
-  #countries .active:hover,
-  #states .active:hover {
-    fill: #EAEAEA;
-  }
-
-  .province:hover {
-    fill: #bad6fc;
-  }
-
-  #cities {
-    stroke-width: 0;
-  }
-
-  .city {
-    fill: #345;
-    stroke: #fff;
-  }
-
-  pre.prettyprint {
-    border: 1px solid #ccc;
-    margin-bottom: 0;
-    padding: 9.5px;
-  }
-</style>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Map</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
 <body>
   <div id="map"></div>
@@ -56,85 +14,5 @@
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="//d3js.org/d3.v3.min.js"></script>
   <script src="//d3js.org/topojson.v3.min.js"></script>
-  <!-- <script src="//d3js.org/topojson.v1.min.js"></script> -->
-
-  <script>
-    var m_width = $("#map").width(),
-      width = 960,
-      height = 800,
-      centered;
-
-    var projection = d3.geo.mercator()
-      .center([104, 36])
-      .scale(850)
-      .translate([width / 2, height / 2]);
-
-    var path = d3.geo.path()
-      .projection(projection);
-
-    var svg = d3.select("#map").append("svg")
-      .attr("preserveAspectRatio", "xMidYMid")
-      .attr("viewBox", "0 0 " + width + " " + height)
-      .attr("width", m_width)
-      .attr("height", m_width * height / width);
-
-    svg.append("rect")
-      .attr("class", "background")
-      .attr("width", width)
-      .attr("height", height)
-      .on("click", clicked);
-
-    var world = svg.append("g");
-    var china = svg.append("g");
-
-    d3.json("./assets/json/countries_topo.json", function (error, us) {
-      world.append("g")
-        .attr("id", "countries")
-        .selectAll("path")
-        .data(topojson.feature(us, us.objects.countries_min).features)
-        .enter().append("path")
-        .attr("d", path)
-        .attr("class", "country")
-        .on("click", clicked);
-    });
-    d3.json("./assets/json/states_topo.json", function (error, us) {
-      china.append("g")
-        .attr("id", "states")
-        .selectAll("path")
-        .data(topojson.feature(us, us.objects.states_min).features)
-        .enter().append("path")
-        .attr("d", path)
-        .attr("class", "province")
-        .on("click", clicked);
-    });
-
-    function clicked(d) {
-      console.log(d);
-      var x, y, k;
-
-      if (d && centered !== d) {
-        var centroid = path.centroid(d);
-        x = centroid[0];
-        y = centroid[1];
-        k = 4;
-        centered = d;
-      } else {
-        x = width / 2;
-        y = height / 2;
-        k = 1;
-        centered = null;
-      }
-
-      china.selectAll("path")
-        .classed("active", centered && function (d) {
-          return d === centered;
-        });
-
-      china.transition()
-        .duration(750)
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y +
-          ")")
-        .style("stroke-width", 1.5 / k + "px");
-    }
-  </script>
+  <script src="main.js"></script>
 </body>
