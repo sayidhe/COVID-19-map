@@ -37,6 +37,14 @@ d3.json("./assets/json/output.json", function (error, data) {
       .attr("class", object)
       .on("click", clicked);
   })
+
+  g.selectAll(".place-label")
+    .data(topojson.feature(data, data.objects.countries_min).features)
+    .enter().append("text")
+    .attr("class", "place-label")
+    .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
+    .attr("dy", ".35em")
+    .text(function(d) { return d.properties.NAME })
 });
 
 function clicked(d) {
