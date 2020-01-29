@@ -3,12 +3,12 @@ var m_width = $("#map").width(),
   height = 800,
   centered;
 
-var projection = d3.geo.mercator()
+var projection = d3.geoMercator()
   .center([104, 36])
   .scale(250)
   .translate([width / 2, height / 2]);
 
-var path = d3.geo.path()
+var path = d3.geoPath()
   .projection(projection);
 
 var svg = d3.select("#map").append("svg")
@@ -25,8 +25,7 @@ svg.append("rect")
 
 var g = svg.append("g");
 
-d3.json("./assets/json/output.json", function (error, data) {
-  console.log(data)
+d3.json("./assets/json/output.json").then(data => {
   Object.keys(data.objects).map(object => {
     g.append("g")
       .attr("id", object)
@@ -37,7 +36,6 @@ d3.json("./assets/json/output.json", function (error, data) {
       .attr("class", object)
       .on("click", clicked);
   })
-
   g.selectAll(".place-label")
     .data(topojson.feature(data, data.objects.countries_min).features)
     .enter().append("text")
@@ -45,7 +43,7 @@ d3.json("./assets/json/output.json", function (error, data) {
     .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
     .attr("dy", ".35em")
     .text(function(d) { return d.properties.NAME })
-});
+})
 
 function clicked(d) {
   console.log(d);
