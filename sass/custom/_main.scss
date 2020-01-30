@@ -1,3 +1,15 @@
+html {
+  height: 100%;
+  font-family: "Noto Serif","PT Serif","source-han-serif-tc",Songti TC,serif;
+  background-color: #f2f2f2;
+  word-wrap: break-word;
+  -ms-overflow-style: -ms-autohiding-scrollbar
+}
+
+html[lang=zh-Hans] {
+  font-family: "Noto Serif","PT Serif","source-han-serif-sc",Songti SC,serif
+}
+
 body,
 h1,
 h2,
@@ -5,7 +17,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 300;
+  font-weight: 400;
   line-height: 140%;
 }
 
@@ -19,6 +31,7 @@ h6 {
 }
 
 h1 {
+  font-weight: 900;
   @include breakpoint(mobile) {
     @include font-size($headline-1*.7);
   }
@@ -28,7 +41,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 400;
+  font-weight: 700;
 }
 
 h4,
