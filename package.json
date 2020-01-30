@@ -31,5 +31,8 @@
     "http-server": "^0.12.1",
     "tslint": "^6.0.0",
     "typescript": "^3.7.5"
+  },
+  "devDependencies": {
+    "merge-stream": "^2.0.0"
   }
 }
