@@ -1,0 +1,119 @@
+#content {
+  .row {
+    padding: 4*$space 0;
+  }
+  #hero {
+    color: $black;
+    height: 100vh;
+    min-height: 480px;
+    // background-image: url(images/poster.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: none;
+    background-attachment: fixed;
+    &:before {
+      content: '';
+      position: absolute;
+      height: 100vh;
+      min-height: 480px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: linear-gradient(60deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+      opacity: .9; 
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      height: 100%;
+
+      .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        @include breakpoint(mobile) {
+          // padding: 8*$space 0;
+        }
+        @include breakpoint(tablet) {
+          // padding: 8*$space 0;
+          & > .one-third {
+            width: 33%;
+          }
+          & > .two-thirds {
+            width: 67%;
+          }
+        }
+      }
+    }
+    h1 {
+      line-height: 130%;
+    }
+    h1 + p {
+      @include font-size($regular);
+      line-height: 140%;
+    }
+    .grid-2 {
+      overflow: hidden;
+      position: relative;
+      img {
+        opacity: 0.6;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 50%;
+      }
+    }
+  }
+  .grid,
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    li {
+      & > *:last-child {
+        margin-bottom: 0
+      }
+    }
+  }
+  .row {
+    & > .left,
+    & > .right {
+      & > *:last-child {
+        margin-bottom: 0
+      }
+    }
+  }
+  #events {
+    ul {
+      list-style-type: none;
+      width: 100%;
+      margin: 0;
+    }
+
+    .event-date {
+      @include breakpoint(tablet) {
+        text-align: right;
+        display: inline-block;
+        float: right;
+      }
+    }
+    .expired {
+      opacity: .4;
+    }
+  }
+  video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+    transition: 1s opacity;
+  }
+}

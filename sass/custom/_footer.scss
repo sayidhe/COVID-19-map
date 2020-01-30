@@ -1,0 +1,46 @@
+#footer {
+  background: $primary;
+  color: $black;
+  @include font-size($smaller);
+  line-height: 140%;
+  padding: $space/2;
+  a {
+    color: inherit;
+    &:hover {
+      color: darken($black, 40%);
+      text-decoration: none;
+    }
+  }
+  p {
+    margin-bottom: $space/2;
+  }
+  svg {
+    fill: $grey;
+    margin-bottom: $space/2;
+    width: 4*$space;
+  }
+  @include breakpoint(mobile) {
+    padding: $space/2 0;
+  }
+  @include breakpoint(tablet) {
+    padding: $space 0;
+  }
+  .legal {
+    color: $black;
+  }
+  .qrcode {
+    width: 100px;
+    @include breakpoint(mobile) {
+      width: 160px;
+    }
+  }
+  li:last-child {
+    text-align: right;
+    @include breakpoint(mobile) {
+      text-align: left;
+    }
+    @include breakpoint(up_to_desktop) {
+      text-align: left;
+    }
+  }
+}

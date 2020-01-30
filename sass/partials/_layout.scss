@@ -1,0 +1,44 @@
+@if index($partials, layout) {
+  .container {
+    box-sizing: border-box;
+    @include clearfix;
+    margin: 0 auto;
+    max-width: $container;
+    @include breakpoint(mobile) {
+      padding: 0 $space;
+    }
+    @include breakpoint(tablet) {
+      padding: 0 1.5*$space;
+    }
+    &.narrow {
+      max-width: $container-narrow;
+    }
+  }
+
+  .row {
+    @include clearfix;
+    @include breakpoint(mobile) {
+      @include clearfix;
+      & > .left + .right,
+      & > .right + .left {
+        margin-top: $space;
+      }
+    }
+    @include breakpoint(tablet) {
+      & > .left,
+      & > .right {
+        box-sizing: border-box;
+        width: 50%;
+      }
+      & > .left {
+        float: left;
+        padding-right: $space;
+      }
+      & > .right {
+        float: right;
+        left: $space;
+        padding-left: $space;
+      }
+    }
+  }
+}

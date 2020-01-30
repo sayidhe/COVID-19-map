@@ -1,0 +1,38 @@
+/* Colors */
+
+$black: #000;
+$yellow: #F7C544;
+$green: #03DAC5;
+$grey: #777;
+$light: #EEE;
+$white: #FFF;
+$line: $light;
+// $line: #DDD;
+$primary: $black;
+$secondary: $green;
+
+/* Fonts */
+
+$body: "Roboto", Arial, Helvetica, sans-serif;
+$headline: $body;
+
+/* Misc */
+
+$radius: 0;
+$container: 1024px;
+$container-narrow: 720px;
+
+/* Sizes */
+
+$headline-1: 48;
+$headline-2: 32;
+$headline-3: 18;
+
+/* Partials */
+
+$partials: (
+  base,
+  grid,
+  helpers,
+  layout
+);

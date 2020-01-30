@@ -1,0 +1,47 @@
+@if index($partials, grid) {
+  .grid,
+  .grid-3 {
+    @include breakpoint(mobile) {
+      @include grid(1);
+    }
+    @include breakpoint(only_tablet) {
+      @include grid(2);
+    }
+    @include breakpoint(desktop) {
+      @include grid;
+    }
+  }
+
+  .grid-4 {
+    @include breakpoint(mobile) {
+      @include grid(2);
+    }
+    @include breakpoint(only_tablet) {
+      @include grid(3);
+    }
+    @include breakpoint(desktop) {
+      @include grid(4);
+    }
+  }
+
+  .grid-2 {
+    @include breakpoint(mobile) {
+      @include grid(1);
+    }
+    @include breakpoint(tablet) {
+      @include grid(2);
+    }
+  }
+
+  .grid,
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    &.padded {
+      margin: -$space/2;
+      > * {
+        padding: $space/2;
+      }
+    }
+  }
+}

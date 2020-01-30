@@ -29,8 +29,22 @@ $ http-server . -p 8000
 ```
 
 ## 生成数据模版
+
 ```bash
 $ npm run g:template
+```
+
+## 使用 `gulp` 来跑服务
+
+安装 `node` 模块
+```bash
+$ npm i
+```
+
+运行 `gulp` 服务
+```bash
+$ gulp serve # 运行运行
+$ gulp production # 部署的时候运行
 ```
 
 ## 参考
