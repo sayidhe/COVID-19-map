@@ -1,4 +1,4 @@
 #!/bin/bash
 
 npm i
-gulp serve
+gulp production
