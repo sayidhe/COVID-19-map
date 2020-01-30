@@ -1,6 +1,6 @@
 var m_width = $("#map").width(),
   width = 960,
-  height = 400,
+  height = 500,
   centered;
 
 var projection = d3.geoMercator()
@@ -49,6 +49,28 @@ const zoom = d3.zoom().on("zoom", () => {
 })
 
 svg.call(zoom)
+
+function getAreaColor(num) {
+  switch (num) {
+    case num > 1000
+      return '#FF5151'
+      break
+    case num > 500
+      return '#FF9797'
+      break
+    case num > 100
+      return '#FFB5B5'
+      break
+    case num > 10
+      return '#FFD2D2'
+      break
+    case num > 0
+      return '#FFECEC'
+      break
+    default
+      return '#F0F0F0'
+  }
+}
 
 function clicked(d) {
   console.log(d);
