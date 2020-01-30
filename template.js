@@ -4,12 +4,12 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter
 const csvWriter = createCsvWriter({
   path: 'data.csv.example',
   header: [
-    {id: 'id', title: 'Id'},
-    {id: 'name', title: 'Name'},
-    {id: 'name_zh', title: 'Chinese Name'},
-    {id: 'confirmed', title: 'Confirmed'},
-    {id: 'death', title: 'Death'},
-    {id: 'note', title: 'Note'}
+    {id: 'id', title: 'id'},
+    {id: 'name', title: 'name'},
+    {id: 'name_zh', title: 'name_zh'},
+    {id: 'confirmed', title: 'confirmed'},
+    {id: 'death', title: 'death'},
+    {id: 'note', title: 'note'}
   ]
 })
 
