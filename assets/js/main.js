@@ -24,24 +24,34 @@ svg.append("rect")
 
 var g = svg.append("g");
 
-d3.json("./assets/json/output.json").then(data => {
-  Object.keys(data.objects).map(object => {
+const fetchMapData = d3.json("./assets/json/output.json")
+const fetchCsvData = d3.json("./assets/json/data.json")
+
+Promise.all([fetchMapData, fetchCsvData]).then(results => {
+  const mapData = results[0]
+  const csvData = results[1]
+  const csvMap = {}
+  csvData.forEach(item => {
+    csvMap[item.id] = item
+  })
+
+  Object.keys(mapData.objects).map(object => {
     g.append("g")
       .attr("id", object)
       .selectAll("path")
-      .data(topojson.feature(data, data.objects[object]).features)
+      .data(topojson.feature(mapData, mapData.objects[object]).features)
       .enter().append("path")
       .attr("d", path)
+      .attr("fill", function(d) {
+        const id = d.properties.ne_id || d.properties.NE_ID
+        if (csvMap[id]) {
+          return getAreaColor(csvMap[id].confirmed)
+        }
+        return '#ccc'
+      })
       .attr("class", object)
       .on("click", clicked)
   })
-  // g.selectAll(".place-label")
-  //   .data(topojson.feature(data, data.objects.countries_min).features)
-  //   .enter().append("text")
-  //   .attr("class", "place-label")
-  //   .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
-  //   .attr("dy", ".35em")
-  //   .text(function(d) { return d.properties.NAME })
 })
 
 const zoom = d3.zoom().on("zoom", () => {
@@ -50,8 +60,9 @@ const zoom = d3.zoom().on("zoom", () => {
 
 svg.call(zoom)
 
-function getAreaColor(num) {
-  switch (num) {
+function getAreaColor(arg) {
+  const num = Number(arg)
+  switch (true) {
     case num > 1000:
       return '#FF5151'
       break
