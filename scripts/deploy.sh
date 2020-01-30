@@ -1,8 +1,7 @@
 #!/bin/bash
 
 if [[ $TRAVIS_BRANCH == 'gh-pages' ]] ; then
-  cd _site
-  rm CNAME
+  cd dist
   touch README.md
   echo -e "# 快速 setup node server\n\n初始化目录: \`npm init\`\n\n安装 http server: \`npm install http-server\`\n\n开启 http server: \`http-server [path] [options]\`\n\nServer 端添加 \`crontab\`:\n\n\`\`\`bash\ncrontab -e\n*/1 * * * * /bin/sh -c 'cd /var/www/event-output && git fetch --all && git reset --hard origin/master'\n\`\`\`" > README.md
 
