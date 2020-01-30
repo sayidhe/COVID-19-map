@@ -25,6 +25,7 @@ h1 {
   }
 }
 
+h2,
 h3,
 h4,
 h5,
@@ -99,4 +100,18 @@ svg {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.justify {
+  display: inline-block; 
+  text-align: justify; 
+  text-align-last: justify; 
+}
+
+.sicked {
+  color: $red;
+}
+
+.death {
+  color: $yellow;
 }

@@ -124,4 +124,12 @@
       }
     }
   }
+  #data {
+    .header {
+      h2~p {
+        @include font-size($larger);
+        font-family: $headline;
+      }
+    }
+  }
 }
