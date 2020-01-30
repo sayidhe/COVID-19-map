@@ -19,12 +19,7 @@
   
   #countries_min .active,
   #states_min .active {
-    fill: #89a;
-  }
-  
-  #countries_min .active:hover,
-  #states_min .active:hover {
-    fill: #EAEAEA;
+    fill: blue;
   }
   
   .province:hover {
@@ -38,6 +33,32 @@
   .city {
     fill: #345;
     stroke: #fff;
+  }
+
+  #map .info-card {
+    font-family: $headline;
+    position: absolute;
+    color: #FFF;
+    padding: 10px;
+    min-width: 100px;
+    background-color: #171717;
+    border: 1px solid #ccc;
+    p {
+      margin: 0;
+      &.title {
+        @include font-size($large);
+        font-weight: 900;
+      }
+      &.confirmed {
+        color: red;
+      }
+      &.death {
+        color: yellow;
+      }
+      &.note {
+        color: gray;
+      }
+    }
   }
   
   pre.prettyprint {

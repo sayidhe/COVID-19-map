@@ -24,6 +24,10 @@ svg.append("rect")
 
 var g = svg.append("g");
 
+const infoCard = d3.select('#map').append('div')
+  .attr('class', 'info-card')
+  .style("display", "none")
+
 const fetchMapData = d3.json("./assets/json/output.json")
 // const fetchMapData = d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-10m.json")
 const fetchCsvData = d3.json("./assets/json/data.json")
@@ -42,21 +46,28 @@ Promise.all([fetchMapData, fetchCsvData]).then(results => {
       .selectAll("path")
       .data(topojson.feature(mapData, mapData.objects[object]).features)
       .enter().append("path")
-      .attr("d", path)
-      .attr("fill", function(d) {
-        const id = d.properties.ne_id || d.properties.NE_ID
-        if (csvMap[id]) {
-          return getAreaColor(csvMap[id].confirmed)
-        }
-        return '#ccc'
-      })
-      .attr("class", object)
-      .on("click", clicked)
+        .attr("d", path)
+        .attr("fill", function(d) {
+          const id = d.properties.ne_id || d.properties.NE_ID
+          if (csvMap[id]) {
+            return getAreaColor(csvMap[id].confirmed)
+          }
+          return '#ccc'
+        })
+        .attr("class", object)
+        .on("mouseover", function (d) {
+          const id = d.properties.ne_id || d.properties.NE_ID
+          showInfoCard(d, csvMap[id])
+        })
+        .on("mouseout", function (d) {
+          hideInfoCard()
+        })
   })
 })
 
 const zoom = d3.zoom().scaleExtent([0.8, 2]).on("zoom", () => {
   g.attr('transform', d3.event.transform)
+  hideInfoCard()
 })
 
 svg.call(zoom)
@@ -84,29 +95,29 @@ function getAreaColor(arg) {
   }
 }
 
-function clicked(d) {
+function hideInfoCard () {
+  infoCard
+    .style("display", "none")
+}
+
+function infoCardHtmlMaker (data) {
+  return `
+    <p class="title">${data.name_zh_hk}</p>
+    <p class="confirmed">確診 ${data.confirmed}</p>
+    <p class="death">死亡 ${data.death}</p>
+    <p class="note">${data.note}</p>
+  `
+}
+
+function showInfoCard(d, data) {
   console.log(d);
-  console.log(d.properties.name_zh)
-  var x, y, k;
+  console.log(data)
 
-  if (d && centered !== d) {
-    var centroid = path.centroid(d);
-    x = centroid[0];
-    y = centroid[1];
-    k = 4;
-    centered = d;
-  } else {
-    x = width / 2;
-    y = height / 2;
-    k = 1;
-    centered = null;
+  if (data) {
+    infoCard
+      .style("display", "block")
+      .style("left", (d3.event.pageX) + 10 + 'px')
+      .style("top", (d3.event.pageY) - 30 + 'px')
+      .html(infoCardHtmlMaker(data))
   }
-
-  g.selectAll("path")
-    .classed("active", centered && function (d) { return d === centered; });
-
-  // g.transition()
-  //   .duration(750)
-  //   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-  //   .style("stroke-width", 1.5 / k + "px");
 }
