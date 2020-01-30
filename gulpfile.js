@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const gulpIf = require('gulp-if');
 const browserSync = require('browser-sync').create();
 const clean = require('gulp-clean');
+const merge = require("merge-stream");
 
 const pug = require("gulp-pug");
 const imagemin = require('gulp-imagemin');
@@ -97,16 +98,16 @@ function images() {
 }
 
 function copyFiles() {
-  gulp.src(['favicon.png', 'CNAME'], { allowEmpty: true })
-    .pipe(gulp.dest('dist'))
-  gulp.src(['assets/**'], { allowEmpty: true })
-    .pipe(gulp.dest('dist/assets'))
+  return merge([
+    gulp.src(['favicon.png', 'CNAME'], { allowEmpty: true }).pipe(gulp.dest('dist')),
+    gulp.src(['assets/**'], { allowEmpty: true }).pipe(gulp.dest('dist/assets'))
+  ]);
 }
 
 //External Tasks
 
 gulp.task("default",
-  gulp.series(cleanDist, gulp.parallel(html, scripts, styles, images))
+  gulp.series(cleanDist, gulp.parallel(html, scripts, styles, images, copyFiles))
 );
 
 gulp.task('production', gulp.series((done) => { production = true;
@@ -121,6 +122,6 @@ gulp.task("serve", gulp.series('default', () => {
   gulp.watch(paths.scripts.src, gulp.series(scripts));
   gulp.watch(paths.images.src, gulp.series(images));
   gulp.watch(paths.html.src, gulp.series(html));
-  gulp.watch("assets/**/*").on('change', browserSync.reload);
+  gulp.watch("assets/**/*", gulp.series(copyFiles, images)).on('change', browserSync.reload);
   gulp.watch(paths.html.src, gulp.series(html)).on('change', browserSync.reload);
 }));
