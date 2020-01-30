@@ -1,0 +1,8 @@
+header.l-header
+  #headerMenuToggle.l-header__menu-toggle.is-collapsed
+    img.l-header__toggle-closed.u-width-100(src=getIcon('menu-toggle.png'))
+    img.l-header__toggle-open.u-width-100(src=getIcon('menu-toggle-open.png'))
+  ul#headerMenu.l-header__menu.is-collapsed
+    each item in globals.menu
+      li.l-header__menu-item
+        a.l-header__menu-link(href=item.link) #{item.text}

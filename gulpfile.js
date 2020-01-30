@@ -4,6 +4,7 @@ const gulpIf = require('gulp-if');
 const browserSync = require('browser-sync').create();
 const clean = require('gulp-clean');
 
+const pug = require("gulp-pug");
 const imagemin = require('gulp-imagemin');
 
 const sass = require("gulp-sass");
@@ -24,7 +25,8 @@ var production = false;
 //Path Definitions
 const paths = {
   html: {
-    src: "*.html",
+    main_pug_src: "pug/*.pug",
+    src: "pug/**/*.pug",
     dest: "dist"
   },
   styles: {
@@ -50,8 +52,11 @@ function cleanDist() {
 
 // If there is Pug file
 function html() {
-  return gulp.src(paths.html.src)
-    //        .pipe(pug())
+  return gulp.src(paths.html.main_pug_src)
+    .pipe(pug({
+      pretty: true,
+      basedir: 'pug'
+    }))
     .pipe(gulp.dest(paths.html.dest))
 }
 
@@ -115,6 +120,7 @@ gulp.task("serve", gulp.series('default', () => {
   gulp.watch(paths.styles.src, gulp.series(styles));
   gulp.watch(paths.scripts.src, gulp.series(scripts));
   gulp.watch(paths.images.src, gulp.series(images));
+  gulp.watch(paths.html.src, gulp.series(html));
   gulp.watch("assets/**/*").on('change', browserSync.reload);
   gulp.watch(paths.html.src, gulp.series(html)).on('change', browserSync.reload);
 }));
