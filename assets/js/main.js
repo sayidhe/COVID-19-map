@@ -52,22 +52,22 @@ svg.call(zoom)
 
 function getAreaColor(num) {
   switch (num) {
-    case num > 1000
+    case num > 1000:
       return '#FF5151'
       break
-    case num > 500
+    case num > 500:
       return '#FF9797'
       break
-    case num > 100
+    case num > 100:
       return '#FFB5B5'
       break
-    case num > 10
+    case num > 10:
       return '#FFD2D2'
       break
-    case num > 0
+    case num > 0:
       return '#FFECEC'
       break
-    default
+    default:
       return '#F0F0F0'
   }
 }
