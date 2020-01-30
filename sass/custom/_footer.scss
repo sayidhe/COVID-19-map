@@ -48,4 +48,10 @@
     align-items: center;
     justify-content: center;
   }
+  .name {
+    p>b {
+      width: 60px;
+      margin-right: $space;
+    }
+  }
 }
