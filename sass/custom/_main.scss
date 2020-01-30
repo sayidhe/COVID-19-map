@@ -1,0 +1,114 @@
+html {
+  height: 100%;
+  font-family: "Noto Serif","PT Serif","source-han-serif-tc",Songti TC,serif;
+  background-color: #f2f2f2;
+  word-wrap: break-word;
+  -ms-overflow-style: -ms-autohiding-scrollbar
+}
+
+html[lang=zh-Hans] {
+  font-family: "Noto Serif","PT Serif","source-han-serif-sc",Songti SC,serif
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  line-height: 140%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: inherit;
+}
+
+h1 {
+  font-weight: 900;
+  @include breakpoint(mobile) {
+    @include font-size($headline-1*.7);
+  }
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
+
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+p {
+  line-height: 170%;
+}
+
+a {
+  color: $primary;
+  transition-property: background, color;
+  transition-duration: $ease;
+}
+
+strong,
+b {
+  font-weight: 400;
+}
+
+svg {
+  fill: $black;
+}
+
+.strapline {
+  color: $grey;
+  @include font-size($smaller);
+  font-weight: inherit;
+  line-height: 140%;
+  margin-top: -300px; 
+}
+
+.thumbnail {
+  background-color: $light;
+  height: 3*$space;
+  width: 3*$space;
+}
+
+.button {
+  background: transparent;
+  border: 1px solid $white;
+  box-sizing: border-box;
+  color: $white;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: inherit;
+  line-height: inherit;
+  outline: none;
+  padding: $space/4 1.5*$space/2;
+  text-align: center;
+  transition-property: background, border, color;
+  transition-duration: $ease;
+  &:hover {
+    border-color: $white;
+    color: $white;
+    text-decoration: none;
+  }
+  &.larger {
+    @include font-size($large);
+    padding: $space/3 $space;
+  }
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}

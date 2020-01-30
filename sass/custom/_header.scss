@@ -1,0 +1,52 @@
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: 100vw;
+  color: $black;
+  @include font-size($smaller);
+  padding: $space/2 0;
+  text-align: right;
+  .container {
+    padding-bottom: $space/2;
+    padding-top: $space/2;
+  }
+  a {
+    color: inherit;
+    &:hover {
+      opacity: .8;
+      text-decoration: none;
+    }
+  }
+  .links {
+    // float: left;
+    display: flex;
+    justify-content: space-between;
+    a {
+      margin-right: 2*$space;
+      &.link-home {
+        svg {
+          height: 14px;
+        }
+        margin-right: 2*$space;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    @include breakpoint(mobile) {
+      .link-who,
+      .link-why,
+      .link-timeline {
+        display: none;
+      }
+    }
+  }
+  .logo {
+    float: left;
+    svg {
+      height: 55px;
+    }
+  }
+}

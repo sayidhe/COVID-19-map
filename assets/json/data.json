@@ -1,0 +1,33 @@
+[
+  {
+    "id": "1159310923",
+    "name": "Gansu",
+    "name_zh": "甘肃省",
+    "confirmed": "888",
+    "death": "",
+    "note": ""
+  },
+  {
+    "id": "1159312657",
+    "name": "Xinjiang",
+    "name_zh": "新疆维吾尔自治区",
+    "confirmed": "12",
+    "death": "1",
+    "note": "test"
+  },
+  {
+    "id": "1159312757",
+    "name": "Inner Mongol",
+    "name_zh": "内蒙古自治区",
+    "confirmed": "4",
+    "death": ""
+  },
+  {
+    "id": "1159312655",
+    "name": "Xizang",
+    "name_zh": "西藏自治区",
+    "confirmed": "2",
+    "death": "",
+    "note": ""
+  }
+]
