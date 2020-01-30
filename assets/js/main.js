@@ -5,7 +5,7 @@ var m_width = $("#map").width(),
 
 var projection = d3.geoMercator()
   .center([104, 36])
-  .scale(250)
+  .scale(200)
   .translate([width / 2, height / 2]);
 
 var path = d3.geoPath()
@@ -25,6 +25,7 @@ svg.append("rect")
 var g = svg.append("g");
 
 const fetchMapData = d3.json("./assets/json/output.json")
+// const fetchMapData = d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-10m.json")
 const fetchCsvData = d3.json("./assets/json/data.json")
 
 Promise.all([fetchMapData, fetchCsvData]).then(results => {
@@ -54,7 +55,7 @@ Promise.all([fetchMapData, fetchCsvData]).then(results => {
   })
 })
 
-const zoom = d3.zoom().on("zoom", () => {
+const zoom = d3.zoom().scaleExtent([0.8, 2]).on("zoom", () => {
   g.attr('transform', d3.event.transform)
 })
 
