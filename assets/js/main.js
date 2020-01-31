@@ -65,7 +65,7 @@ Promise.all([fetchMapData, fetchCsvData]).then(([mapData, csvData]) => {
   })
 })
 
-const zoom = d3.zoom().scaleExtent([0.8, 2]).on("zoom", () => {
+const zoom = d3.zoom().scaleExtent([0.8, 10]).on("zoom", () => {
   g.attr('transform', d3.event.transform)
   hideInfoCard()
 })
