@@ -28,7 +28,7 @@ var production = false;
 //Path Definitions
 const paths = {
   html: {
-    main_pug_src: "pug/*.pug",
+    main_pug_src: "pug/index.pug",
     src: "pug/**/*.pug",
     dest: "dist"
   },
@@ -56,10 +56,12 @@ function cleanDist() {
 // If there is Pug file
 function html() {
   return gulp.src(paths.html.main_pug_src)
-    .pipe(data( function(file) {
-      return JSON.parse(
-        fs.readFileSync('assets/json/states_topo.json', 'utf8')
+    .pipe(data(function(file) {
+      var data = JSON.parse(
+        fs.readFileSync('assets/json/data.json', 'utf8')
       );
+      // console.log(data);
+      return data;
     }))
     .pipe(pug({
       pretty: true,

@@ -60,7 +60,7 @@ block mainContent
                 th Location
                 th.confirmed Confirmed
                 th.death Death
-              each item in data
+              each item in china
                 if item.type == "china"
                   +table(item)
               
@@ -79,6 +79,6 @@ block mainContent
                 th Location
                 th.confirmed Confirmed
                 th.death Death
-              each item in data
+              each item in world
                 if item.type == "world"
                   +table(item)

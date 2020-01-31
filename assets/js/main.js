@@ -32,12 +32,12 @@ const fetchMapData = d3.json("./assets/json/output.json")
 // const fetchMapData = d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-10m.json")
 const fetchCsvData = d3.json("./assets/json/data.json")
 
-Promise.all([fetchMapData, fetchCsvData]).then(results => {
-  const mapData = results[0]
-  const csvData = results[1]
+Promise.all([fetchMapData, fetchCsvData]).then(([mapData, csvData]) => {
   const csvMap = {}
-  csvData.forEach(item => {
-    csvMap[item.id] = item
+  Object.keys(csvData).forEach(key => {
+    csvData[key].forEach(item => {
+      csvMap[item.id] = item
+    })
   })
 
   Object.keys(mapData.objects).map(object => {
