@@ -8,7 +8,6 @@ const csvWriter = createCsvWriter({
     {id: 'type', title: 'type'},
     {id: 'name', title: 'name'},
     {id: 'name_zh', title: 'name_zh'},
-    {id: 'name_zh_hk', title: 'name_zh_hk'},
     {id: 'confirmed', title: 'confirmed'},
     {id: 'death', title: 'death'},
     {id: 'note', title: 'note'}
@@ -25,9 +24,8 @@ const chinaData = data.objects.states_min.geometries.map(item => {
     name: item.properties.name,
     type: 'china',
     name_zh: item.properties.name_zh,
-    name_zh_hk: item.properties.name_zh,
-    confirmed: '',
-    death: '',
+    confirmed: 0,
+    death: 0,
     note: ''
   }
 })
@@ -38,9 +36,8 @@ const worldData = data.objects.countries_min.geometries.map(item => {
     name: item.properties.NAME,
     type: 'world',
     name_zh: item.properties.NAME_ZH,
-    name_zh_hk: item.properties.NAME_ZH,
-    confirmed: '',
-    death: '',
+    confirmed: 0,
+    death: 0,
     note: ''
   }
 })

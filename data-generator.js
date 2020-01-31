@@ -8,7 +8,7 @@ const csvData = {}
 fs.createReadStream('data.csv')
   .pipe(csv())
   .on('data', (row) => {
-    if (!row.confirmed) {
+    if (!Number(row.confirmed)) {
       return
     }
 
@@ -20,11 +20,41 @@ fs.createReadStream('data.csv')
     }
   })
   .on('end', () => {
-    const filteredData = {}
+    const calculatedData = {
+      chinaCount: {},
+      worldCount: {},
+      outsideChinaCount: {},
+      china: {},
+      world: {}
+    }
+
     Object.keys(csvData).forEach(key => {
-      filteredData[key] = csvData[key].sort(sortArea)
+      calculatedData[key] = csvData[key].sort(sortArea)
     })
-    writeData(filteredData).then((data) => {
+
+    // 大陆数据统计
+    calculatedData.chinaCount.confirmed = calculatedData.china
+      .map(item => Number(item.confirmed))
+      .reduce((acc, cur) => acc + cur)
+
+    calculatedData.chinaCount.death = calculatedData.china
+      .map(item => Number(item.death))
+      .reduce((acc, cur) => acc + cur)
+
+    // 大陆外数据统计
+    calculatedData.outsideChinaCount.confirmed = calculatedData.world
+      .map(item => Number(item.confirmed))
+      .reduce((acc, cur) => acc + cur)
+
+    calculatedData.outsideChinaCount.death = calculatedData.world
+      .map(item => Number(item.death))
+      .reduce((acc, cur) => acc + cur)
+
+    // 全球数据统计
+    calculatedData.worldCount.confirmed = calculatedData.chinaCount.confirmed + calculatedData.outsideChinaCount.confirmed
+    calculatedData.worldCount.death = calculatedData.chinaCount.death + calculatedData.outsideChinaCount.death
+
+    writeData(calculatedData).then((data) => {
       console.log('Data successfully generated!')
     })
   })
