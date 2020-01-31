@@ -125,3 +125,45 @@ svg {
 .death {
   color: $yellow;
 }
+
+table {
+  tbody {
+    tr {
+      td,
+      th {
+        border-top: none;
+        padding: $space/2;
+      }
+    }
+  }
+}
+
+// Dark theme
+.d-index {
+  color: $white;
+
+  #header {
+    svg {fill: $white;}
+  }
+
+  #content {
+    #hero {
+      svg { fill: $white;}
+      color: $white;
+      a { color: $white;}
+    }
+  
+    #data {
+      background-color: $black;
+    }
+  }
+
+  #footer {
+    color: $white;
+    background-color: $black;
+
+    svg {
+      fill: $white;
+    }
+  }
+}
