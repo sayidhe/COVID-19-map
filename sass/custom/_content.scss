@@ -108,6 +108,14 @@
       ul>:last-child {
         color: $yellow;
       }
+      ul.grid-2 {
+        &>* {
+          width: 50%;
+        }
+        &>*:nth-child(1n+1) {
+          clear: none;
+        }
+      }
     }
   }
   .grid,
