@@ -34,28 +34,45 @@
     stroke: #fff;
   }
 
-  #map .info-card {
-    font-family: $headline;
-    position: absolute;
-    color: #FFF;
-    padding: 10px;
-    min-width: 100px;
-    background-color: $black;
-    border: 1px solid $silver;
-    p {
-      margin: 0;
-      &.title {
-        @include font-size($large);
-        font-weight: 900;
+  #map {
+    position: relative;
+    cursor: move;
+    .ctrl {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      button {
+        display: inline-block;
+        background: $black;
+        color: #FFF;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
       }
-      &.confirmed {
-        color: $red;
-      }
-      &.death {
-        color: $yellow;
-      }
-      &.note {
-        color: $grey;
+    }
+    .info-card {
+      font-family: $headline;
+      position: absolute;
+      color: #FFF;
+      padding: 10px;
+      min-width: 100px;
+      background-color: $black;
+      border: 1px solid $silver;
+      p {
+        margin: 0;
+        &.title {
+          @include font-size($large);
+          font-weight: 900;
+        }
+        &.confirmed {
+          color: $red;
+        }
+        &.death {
+          color: $yellow;
+        }
+        &.note {
+          color: $grey;
+        }
       }
     }
   }

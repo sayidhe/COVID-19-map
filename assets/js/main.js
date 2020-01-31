@@ -65,12 +65,21 @@ Promise.all([fetchMapData, fetchCsvData]).then(([mapData, csvData]) => {
   })
 })
 
-const zoom = d3.zoom().scaleExtent([0.8, 10]).on("zoom", () => {
+const zoom = d3.zoom().scaleExtent([0.2, 5]).on("zoom", () => {
   g.attr('transform', d3.event.transform)
   hideInfoCard()
 })
 
-svg.call(zoom)
+d3.selectAll("button[data-zoom]")
+  .on("click", zoomClick)
+
+svg
+  .call(zoom)
+  .on("wheel.zoom", null)
+
+function zoomClick () {
+  svg.transition().call(zoom.scaleBy, Math.pow(2, +this.getAttribute("data-zoom")))
+}
 
 function getAreaColor(arg) {
   const num = Number(arg)
