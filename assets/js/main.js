@@ -34,7 +34,8 @@ const fetchCsvData = d3.json("./assets/json/data.json")
 
 Promise.all([fetchMapData, fetchCsvData]).then(([mapData, csvData]) => {
   const csvMap = {}
-  Object.keys(csvData).forEach(key => {
+  const keys = ['china', 'world']
+  keys.forEach(key => {
     csvData[key].forEach(item => {
       csvMap[item.id] = item
     })
@@ -84,23 +85,29 @@ function zoomClick () {
 function getAreaColor(arg) {
   const num = Number(arg)
   switch (true) {
-    case num > 1000:
-      return '#430400'
+    case num > 2999:
+      return '#350000'
       break
-    case num > 500:
-      return '#FF9797'
+    case num > 999:
+      return '#600000'
       break
-    case num > 100:
-      return '#FFB5B5'
+    case num > 499:
+      return '#910000'
       break
-    case num > 10:
-      return '#FFD2D2'
+    case num > 199:
+      return '#d32f2f'
+      break
+    case num > 99:
+      return '#f95050'
+      break
+    case num > 29:
+      return '#ff7373'
       break
     case num > 0:
-      return '#FFECEC'
+      return '#ffabab'
       break
     default:
-      return '#F0F0F0'
+      return '#ccc'
   }
 }
 
@@ -119,14 +126,11 @@ function infoCardHtmlMaker (data) {
 }
 
 function showInfoCard(d, data) {
-  console.log(d);
-  console.log(data)
-
   if (data) {
     infoCard
       .style("display", "block")
       .style("left", (d3.event.pageX) + 10 + 'px')
-      .style("top", (d3.event.pageY) - 30 + 'px')
+      .style("top", (d3.event.pageY) - 30 - $('#map').offset().top + 'px')
       .html(infoCardHtmlMaker(data))
   }
 }
