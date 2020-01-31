@@ -1,4 +1,16 @@
 {
+  "chinaCount": {
+    "confirmed": 33010,
+    "death": 10
+  },
+  "worldCount": {
+    "confirmed": 43230,
+    "death": 10
+  },
+  "outsideChinaCount": {
+    "confirmed": 10220,
+    "death": 0
+  },
   "china": [
     {
       "id": "1159312741",
