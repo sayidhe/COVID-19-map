@@ -24,7 +24,7 @@ block mainContent
           h1 新型冠狀病毒感染肺炎 <br/> 全球確診病例分布圖 
           div.summary
             ul.grid-2.padded
-              li.sicked
+              li.confirmed
                 div.label 累計確診
                 div.number 6142
               li.death
@@ -36,6 +36,12 @@ block mainContent
 
   section#map
 
+  mixin table(item)
+    tr
+      th #{item.name_zh_hk}
+      th #{item.confirmed}
+      th #{item.death}
+
   section#data
     div.container
       div.row
@@ -43,8 +49,8 @@ block mainContent
           div.header
             h2.align-center.margin-bottom-0 中國大陸境內
             p.align-center
-              span.label.sicked 累計確診
-              span.number.sicked 6142
+              span.label.confirmed 累計確診
+              span.number.confirmed 6142
               span  / 
               span.label.death 死亡
               span.number.death 6142
@@ -52,14 +58,18 @@ block mainContent
             table
               tr
                 th Location
-                th.sicked Sicked
+                th.confirmed Confirmed
                 th.death Death
+              each item in data
+                if item.type == "china"
+                  +table(item)
+              
         div.right
           div.header
             h2.align-center.margin-bottom-0 中國大陸境外
             p.align-center
-              span.label.sicked 累計確診
-              span.number.sicked 89
+              span.label.confirmed 累計確診
+              span.number.confirmed 89
               span  / 
               span.label.death 死亡
               span.number.death 9
@@ -67,25 +77,8 @@ block mainContent
             table
               tr
                 th Location
-                th Sicked
+                th Confirmed
                 th Death
-  
-  //- section#test
-  //-   - var movieList = [{title: "Ocean's Eleven", rating: 9.2}, {title: "Pirates of the Caribbean", rating: 9.7}];
-    
-  //-   mixin movie-card(movie)
-  //-     h2.movie-title= movie.title
-  //-     div.rating
-  //-       p= movie.rating
-
-  //-   for movie in movieList
-  //-     +movie-card(movie)
-
-  section#test
-    div.container
-      each item in ncov.data
-        li
-          span #{item.name_zh_hk}
-
-
-  
+              each item in data
+                if item.type == "world"
+                  +table(item)
