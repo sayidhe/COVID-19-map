@@ -40,8 +40,8 @@
     color: #FFF;
     padding: 10px;
     min-width: 100px;
-    background-color: #171717;
-    border: 1px solid #ccc;
+    background-color: $black;
+    border: 1px solid $silver;
     p {
       margin: 0;
       &.title {
@@ -49,18 +49,18 @@
         font-weight: 900;
       }
       &.confirmed {
-        color: red;
+        color: $red;
       }
       &.death {
-        color: yellow;
+        color: $yellow;
       }
       &.note {
-        color: gray;
+        color: $grey;
       }
     }
   }
   
-  pre.prettyprint {
+  pre.prettyprint {/*  */
     border: 1px solid #ccc;
     margin-bottom: 0;
     padding: 9.5px;
