@@ -49,17 +49,17 @@ block mainContent
           div.header
             h2.align-center.margin-bottom-0 中國大陸境內
             p.align-center
-              span.label.confirmed 累計確診
-              span.number.confirmed 6142
+              span.confirmed
+                span.label 累計確診
+                span.number 6142
+                span 例
               span  / 
-              span.label.death 死亡
-              span.number.death 6142
+              span.death
+                span.label 死亡
+                span.number 6142
+                span 例
           div.content
             table
-              tr
-                th Location
-                th.confirmed Confirmed
-                th.death Death
               each item in china
                 if item.type == "china"
                   +table(item)
@@ -68,17 +68,18 @@ block mainContent
           div.header
             h2.align-center.margin-bottom-0 中國大陸境外
             p.align-center
-              span.label.confirmed 累計確診
-              span.number.confirmed 89
+              span.confirmed
+                span.label 累計確診
+                span.number 89
+                span 例
               span  / 
-              span.label.death 死亡
-              span.number.death 9
+              span.death
+                span.label 死亡
+                span.number 12
+                span 例
           div.content
             table
               tr
-                th Location
-                th.confirmed Confirmed
-                th.death Death
               each item in world
                 if item.type == "world"
                   +table(item)
