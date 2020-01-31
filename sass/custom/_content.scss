@@ -97,6 +97,9 @@
         font-family: $headline;
         line-height: 100%;
         font-weight: 700;
+        @include breakpoint(mobile) {
+          @include font-size($headline-1);
+        }
       }
       ul>:first-child {
         color: $red;
@@ -125,6 +128,7 @@
     }
   }
   #data {
+    border-bottom: $light solid 1px;
     .header {
       h2~p {
         @include font-size($larger);

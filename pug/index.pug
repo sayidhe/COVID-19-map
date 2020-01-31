@@ -38,9 +38,9 @@ block mainContent
 
   mixin table(item)
     tr
-      th #{item.name_zh_hk}
-      th #{item.confirmed}
-      th #{item.death}
+      td #{item.name_zh_hk}
+      td.confirmed #{item.confirmed}
+      td.death #{item.death}
 
   section#data
     div.container
@@ -77,8 +77,8 @@ block mainContent
             table
               tr
                 th Location
-                th Confirmed
-                th Death
+                th.confirmed Confirmed
+                th.death Death
               each item in data
                 if item.type == "world"
                   +table(item)

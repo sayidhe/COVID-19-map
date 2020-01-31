@@ -22,13 +22,6 @@ h6 {
   color: inherit;
 }
 
-h1 {
-  font-weight: 900;
-  @include breakpoint(mobile) {
-    @include font-size($headline-1*.7);
-  }
-}
-
 h2,
 h3,
 h4,
@@ -42,6 +35,19 @@ h5,
 h6 {
   font-size: inherit;
   line-height: inherit;
+}
+
+h1 {
+  font-weight: 900;
+  @include breakpoint(mobile) {
+    @include font-size($headline-1*.7);
+  }
+}
+
+h2 {
+  @include breakpoint(mobile) {
+    @include font-size($headline-1*.6);
+  }
 }
 
 p {
