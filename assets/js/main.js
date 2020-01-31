@@ -85,7 +85,7 @@ function getAreaColor(arg) {
   const num = Number(arg)
   switch (true) {
     case num > 1000:
-      return '#FF5151'
+      return '#430400'
       break
     case num > 500:
       return '#FF9797'

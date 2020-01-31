@@ -1,84 +1,92 @@
 #map {
-    background-color: #fff;
-    overflow: hidden;
-  }
-  
+  position: relative;
+  cursor: move;
+  background-color: $light;
+  overflow: hidden;
+
   .background {
     fill: none;
     pointer-events: all;
   }
-  
-  #countries_min,
-  #states_min {
-    fill: #cde;
-    stroke: #fff;
+
+  .ctrl {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    button {
+      display: inline-block;
+      background: $black;
+      color: #FFF;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+  }
+
+  .info-card {
+    font-family: $headline;
+    position: absolute;
+    color: #FFF;
+    padding: 10px;
+    min-width: 100px;
+    background-color: $black;
+    border: 1px solid $silver;
+
+    p {
+      margin: 0;
+
+      &.title {
+        @include font-size($large);
+        font-weight: 900;
+      }
+
+      &.confirmed {
+        color: $red;
+      }
+
+      &.death {
+        color: $yellow;
+      }
+
+      &.note {
+        color: $grey;
+      }
+    }
+  }
+
+
+  #countries,
+  #states {
+    fill: $grey;
+    stroke: darken(#ccc, 20%);
+    stroke-width: .1;
     stroke-linejoin: round;
     stroke-linecap: round;
   }
-  
-  #countries_min .active,
-  #states_min .active {
+
+  #countries .active,
+  #states .active {
     fill: blue;
   }
-  
+
   .province:hover {
     fill: #bad6fc;
   }
-  
+
   #cities {
     stroke-width: 0;
   }
-  
+
   .city {
     fill: #345;
     stroke: #fff;
   }
 
-  #map {
-    position: relative;
-    cursor: move;
-    .ctrl {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      button {
-        display: inline-block;
-        background: $black;
-        color: #FFF;
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-      }
-    }
-    .info-card {
-      font-family: $headline;
-      position: absolute;
-      color: #FFF;
-      padding: 10px;
-      min-width: 100px;
-      background-color: $black;
-      border: 1px solid $silver;
-      p {
-        margin: 0;
-        &.title {
-          @include font-size($large);
-          font-weight: 900;
-        }
-        &.confirmed {
-          color: $red;
-        }
-        &.death {
-          color: $yellow;
-        }
-        &.note {
-          color: $grey;
-        }
-      }
-    }
-  }
-  
-  pre.prettyprint {/*  */
+  pre.prettyprint {
+    /*  */
     border: 1px solid #ccc;
     margin-bottom: 0;
     padding: 9.5px;
   }
+}
