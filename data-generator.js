@@ -2,20 +2,29 @@ const fs = require('fs')
 const csv = require('csv-parser')
 
 // csv 数据缓存
-const csvData = []
+const csvData = {}
 
 // 读取 csv 并处理 & 写入 json
 fs.createReadStream('data.csv')
   .pipe(csv())
   .on('data', (row) => {
-    csvData.push(row)
+    if (!row.confirmed) {
+      return
+    }
+
+    const { type } = row
+    if (csvData[type]) {
+      csvData[type].push(row)
+    } else {
+      csvData[type] = [row]
+    }
   })
   .on('end', () => {
-    const filteredData = csvData
-      .filter(item => item.confirmed !== '')
-      .sort(sortArea)
+    const filteredData = {}
+    Object.keys(csvData).forEach(key => {
+      filteredData[key] = csvData[key].sort(sortArea)
+    })
     writeData(filteredData).then((data) => {
-      console.log(data)
       console.log('Data successfully generated!')
     })
   })
