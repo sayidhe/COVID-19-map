@@ -1,7 +1,7 @@
 extends /bases/_base
 
 block variables
-  - var pageClass = 'p-index'
+  - var pageClass = 'd-index'
 
 block mainContent
   section#hero
@@ -14,17 +14,17 @@ block mainContent
               a(class='facebook' href='#' target='_blank')
                 svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.33 19.11" height="14px")
                   g(data-name='layer1')
-                    path(d="M9.94 0H7.46a4.35 4.35 0 00-4.58 4.7v2.17H.39a.39.39 0 00-.39.39v3.14a.38.38 0 00.39.39h2.49v7.93a.39.39 0 00.39.39h3.25a.38.38 0 00.39-.39v-7.93h2.92a.38.38 0 00.38-.39V7.26A.4.4 0 0010.1 7a.36.36 0 00-.27-.12H6.91V5c0-.88.21-1.33 1.36-1.33h1.67a.38.38 0 00.39-.39V.39A.39.39 0 009.94 0z" fill="#000" data-name="layer2")
+                    path(d="M9.94 0H7.46a4.35 4.35 0 00-4.58 4.7v2.17H.39a.39.39 0 00-.39.39v3.14a.38.38 0 00.39.39h2.49v7.93a.39.39 0 00.39.39h3.25a.38.38 0 00.39-.39v-7.93h2.92a.38.38 0 00.38-.39V7.26A.4.4 0 0010.1 7a.36.36 0 00-.27-.12H6.91V5c0-.88.21-1.33 1.36-1.33h1.67a.38.38 0 00.39-.39V.39A.39.39 0 009.94 0z" data-name="layer2")
 
               a(class='twitter' href='#' target='_blank')
                 svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.52 19.11" height="12px")
                   g(data-name='layer1')
-                    path(d="M23.52 2.26a9.71 9.71 0 01-2.78.74A4.72 4.72 0 0022.86.36a9.8 9.8 0 01-3.05 1.17 4.83 4.83 0 00-8.35 3.29 4.88 4.88 0 00.12 1.1 13.61 13.61 0 01-9.94-5 4.82 4.82 0 001.48 6.4 4.73 4.73 0 01-2.18-.59 4.84 4.84 0 003.86 4.79 4.68 4.68 0 01-1.26.16 4.53 4.53 0 01-.91-.08 4.86 4.86 0 004.5 3.4 9.7 9.7 0 01-6 2.05A8.77 8.77 0 010 17a13.65 13.65 0 007.4 2.16A13.63 13.63 0 0021.12 5.39v-.62a9.47 9.47 0 002.4-2.51z" fill="#000" data-name="layer2")
+                    path(d="M23.52 2.26a9.71 9.71 0 01-2.78.74A4.72 4.72 0 0022.86.36a9.8 9.8 0 01-3.05 1.17 4.83 4.83 0 00-8.35 3.29 4.88 4.88 0 00.12 1.1 13.61 13.61 0 01-9.94-5 4.82 4.82 0 001.48 6.4 4.73 4.73 0 01-2.18-.59 4.84 4.84 0 003.86 4.79 4.68 4.68 0 01-1.26.16 4.53 4.53 0 01-.91-.08 4.86 4.86 0 004.5 3.4 9.7 9.7 0 01-6 2.05A8.77 8.77 0 010 17a13.65 13.65 0 007.4 2.16A13.63 13.63 0 0021.12 5.39v-.62a9.47 9.47 0 002.4-2.51z" data-name="layer2")
 
           h1 新型冠狀病毒感染肺炎 <br/> 全球確診病例分布圖 
           div.summary
             ul.grid-2.padded
-              li.sicked
+              li.confirmed
                 div.label 累計確診
                 div.number 6142
               li.death
@@ -36,6 +36,12 @@ block mainContent
 
   section#map
 
+  mixin table(item)
+    tr
+      td #{item.name_zh_hk}
+      td.confirmed #{item.confirmed}
+      td.death #{item.death}
+
   section#data
     div.container
       div.row
@@ -43,8 +49,8 @@ block mainContent
           div.header
             h2.align-center.margin-bottom-0 中國大陸境內
             p.align-center
-              span.label.sicked 累計確診
-              span.number.sicked 6142
+              span.label.confirmed 累計確診
+              span.number.confirmed 6142
               span  / 
               span.label.death 死亡
               span.number.death 6142
@@ -52,14 +58,18 @@ block mainContent
             table
               tr
                 th Location
-                th.sicked Sicked
+                th.confirmed Confirmed
                 th.death Death
+              each item in data
+                if item.type == "china"
+                  +table(item)
+              
         div.right
           div.header
             h2.align-center.margin-bottom-0 中國大陸境外
             p.align-center
-              span.label.sicked 累計確診
-              span.number.sicked 89
+              span.label.confirmed 累計確診
+              span.number.confirmed 89
               span  / 
               span.label.death 死亡
               span.number.death 9
@@ -67,6 +77,8 @@ block mainContent
             table
               tr
                 th Location
-                th Sicked
-                th Death
-  
+                th.confirmed Confirmed
+                th.death Death
+              each item in data
+                if item.type == "world"
+                  +table(item)

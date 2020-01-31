@@ -6,6 +6,8 @@ const clean = require('gulp-clean');
 const merge = require("merge-stream");
 
 const pug = require("gulp-pug");
+const data = require('gulp-data');
+const fs = require('fs');
 const imagemin = require('gulp-imagemin');
 
 const sass = require("gulp-sass");
@@ -54,6 +56,11 @@ function cleanDist() {
 // If there is Pug file
 function html() {
   return gulp.src(paths.html.main_pug_src)
+    .pipe(data( function(file) {
+      return JSON.parse(
+        fs.readFileSync('assets/json/states_topo.json', 'utf8')
+      );
+    }))
     .pipe(pug({
       pretty: true,
       basedir: 'pug'

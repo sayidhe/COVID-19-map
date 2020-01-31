@@ -20,8 +20,9 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background-image: linear-gradient(60deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
-      opacity: .9; 
+      // background-image: linear-gradient(60deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+      // opacity: .9; 
+      background-color: rgba(0, 0, 0, 0.8);
     }
     .container {
       display: flex;
@@ -97,6 +98,9 @@
         font-family: $headline;
         line-height: 100%;
         font-weight: 700;
+        @include breakpoint(mobile) {
+          @include font-size($headline-1);
+        }
       }
       ul>:first-child {
         color: $red;
@@ -125,6 +129,7 @@
     }
   }
   #data {
+    border-bottom: $light solid 1px;
     .header {
       h2~p {
         @include font-size($larger);

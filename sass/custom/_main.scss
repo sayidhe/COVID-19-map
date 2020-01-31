@@ -1,3 +1,7 @@
+html[lang=zh-Hans] {
+  font-family: "Noto Serif CJK TC", "Noto Serif","PT Serif","source-han-serif-sc",Songti SC,serif;
+}
+
 body,
 h1,
 h2,
@@ -18,13 +22,6 @@ h6 {
   color: inherit;
 }
 
-h1 {
-  font-weight: 900;
-  @include breakpoint(mobile) {
-    @include font-size($headline-1*.7);
-  }
-}
-
 h2,
 h3,
 h4,
@@ -38,6 +35,19 @@ h5,
 h6 {
   font-size: inherit;
   line-height: inherit;
+}
+
+h1 {
+  font-weight: 900;
+  @include breakpoint(mobile) {
+    @include font-size($headline-1*.7);
+  }
+}
+
+h2 {
+  @include breakpoint(mobile) {
+    @include font-size($headline-1*.6);
+  }
 }
 
 p {
@@ -108,10 +118,52 @@ svg {
   text-align-last: justify; 
 }
 
-.sicked {
+.confirmed {
   color: $red;
 }
 
 .death {
   color: $yellow;
+}
+
+table {
+  tbody {
+    tr {
+      td,
+      th {
+        border-top: none;
+        padding: $space/2;
+      }
+    }
+  }
+}
+
+// Dark theme
+.d-index {
+  color: $white;
+
+  #header {
+    svg {fill: $white;}
+  }
+
+  #content {
+    #hero {
+      svg { fill: $white;}
+      color: $white;
+      a { color: $white;}
+    }
+  
+    #data {
+      background-color: $black;
+    }
+  }
+
+  #footer {
+    color: $white;
+    background-color: $black;
+
+    svg {
+      fill: $white;
+    }
+  }
 }
