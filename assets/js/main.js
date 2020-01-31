@@ -102,7 +102,7 @@ function hideInfoCard () {
 
 function infoCardHtmlMaker (data) {
   return `
-    <p class="title">${data.name_zh_hk}</p>
+    <p class="title">${data.name_zh}</p>
     <p class="confirmed">確診 ${data.confirmed}</p>
     <p class="death">死亡 ${data.death}</p>
     <p class="note">${data.note}</p>

@@ -8,7 +8,7 @@ const csvData = {}
 fs.createReadStream('data.csv')
   .pipe(csv())
   .on('data', (row) => {
-    if (!row.confirmed) {
+    if (!Number(row.confirmed)) {
       return
     }
 
