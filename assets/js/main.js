@@ -28,12 +28,13 @@ const infoCard = d3.select('#map').append('div')
   .attr('class', 'info-card')
   .style("display", "none")
 
+const csvMap = {}
+
 const fetchMapData = d3.json("./assets/json/output.json")
 // const fetchMapData = d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-10m.json")
 const fetchCsvData = d3.json("./assets/json/data.json")
 
 Promise.all([fetchMapData, fetchCsvData]).then(([mapData, csvData]) => {
-  const csvMap = {}
   const keys = ['china', 'world']
   keys.forEach(key => {
     csvData[key].forEach(item => {
@@ -48,20 +49,18 @@ Promise.all([fetchMapData, fetchCsvData]).then(([mapData, csvData]) => {
       .data(topojson.feature(mapData, mapData.objects[object]).features)
       .enter().append("path")
         .attr("d", path)
-        .attr("fill", function(d) {
-          const id = d.properties.ne_id || d.properties.NE_ID
-          if (csvMap[id]) {
-            return getAreaColor(csvMap[id].confirmed)
-          }
-          return '#9b9b9b'
-        })
+        .attr("fill", getAreaColor)
         .attr("class", object)
         .on("mouseover", function (d) {
           const id = d.properties.ne_id || d.properties.NE_ID
           showInfoCard(d, csvMap[id])
+          d3.select(this).attr("fill", function () {
+            return d3.color(getAreaColor(d)).brighter(0.5)
+          })
         })
         .on("mouseout", function (d) {
           hideInfoCard()
+          d3.select(this).attr("fill", getAreaColor(d))
         })
   })
 })
@@ -82,8 +81,13 @@ function zoomClick () {
   svg.transition().call(zoom.scaleBy, Math.pow(2, +this.getAttribute("data-zoom")))
 }
 
-function getAreaColor(arg) {
-  const num = Number(arg)
+function getAreaColor(d) {
+  const id = d.properties.ne_id || d.properties.NE_ID
+  let num = 0
+  if (csvMap[id]) {
+    num = csvMap[id].confirmed
+  }
+
   switch (true) {
     case num > 2999:
       return '#350000'
