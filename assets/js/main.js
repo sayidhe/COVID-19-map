@@ -53,7 +53,7 @@ Promise.all([fetchMapData, fetchCsvData]).then(([mapData, csvData]) => {
           if (csvMap[id]) {
             return getAreaColor(csvMap[id].confirmed)
           }
-          return '#ccc'
+          return '#9b9b9b'
         })
         .attr("class", object)
         .on("mouseover", function (d) {
@@ -107,7 +107,7 @@ function getAreaColor(arg) {
       return '#ffabab'
       break
     default:
-      return '#ccc'
+      return '#9b9b9b'
   }
 }
 
