@@ -2,18 +2,47 @@
   position: relative;
   height: 90vh;
   cursor: move;
-  background-color: $light;
+  background-color: #191919;
   overflow: hidden;
 
   .background {
     fill: none;
     pointer-events: all;
   }
+  
+  #countries,
+  #states {
+    fill: $grey;
+    stroke: darken(#9b9b9b, 20%);
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  #countries { stroke-width: .5; }
+  #states { stroke-width: .1; }
+
+  #countries .active,
+  #states .active {
+    fill: blue;
+  }
+
+  .province:hover {
+    fill: #bad6fc;
+  }
+
+  #cities {
+    stroke-width: 0;
+  }
+
+  .city {
+    fill: #345;
+    stroke: #fff;
+  }
 
   .ctrl {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: $space;
+    right: $space;
     z-index: 1000;
 
     button {
@@ -23,7 +52,55 @@
       width: 40px;
       height: 40px;
       cursor: pointer;
-      outline: none;
+      &:focus {outline:none;}
+    }
+  }
+
+  ul.map-colors {
+    position: absolute;
+    bottom: 0;
+    right: $space*2;
+    font-size: 12px;
+    color: darken(#9b9b9b, 20%);
+    line-height: 1;
+    list-style-type: none;
+    text-align: right;
+
+    li:nth-child(1)::after,
+    li:nth-child(2)::after,
+    li:nth-child(3)::after,
+    li:nth-child(4)::after,
+    li:nth-child(5)::after,
+    li:nth-child(6)::after,
+    li:nth-child(7)::after {
+      content:'';
+      display:inline-block;
+      width: 12px; 
+      height: 12px;
+      position: absolute;
+      right: -$space;
+    }
+
+    li:nth-child(1)::after {
+      background: #350000;
+    }
+    li:nth-child(2)::after {
+      background: #600000;
+    }
+    li:nth-child(3)::after {
+      background: #910000;
+    }
+    li:nth-child(4)::after {
+      background: #d32f2f;
+    }
+    li:nth-child(5)::after {
+      background: #f95050;
+    }
+    li:nth-child(6)::after {
+      background: #ff7373;
+    }
+    li:nth-child(7)::after {
+      background: #ffabab;
     }
   }
 
@@ -56,34 +133,6 @@
         color: $grey;
       }
     }
-  }
-
-
-  #countries,
-  #states {
-    fill: $grey;
-    stroke: darken(#ccc, 20%);
-    stroke-width: .1;
-    stroke-linejoin: round;
-    stroke-linecap: round;
-  }
-
-  #countries .active,
-  #states .active {
-    fill: blue;
-  }
-
-  .province:hover {
-    fill: #bad6fc;
-  }
-
-  #cities {
-    stroke-width: 0;
-  }
-
-  .city {
-    fill: #345;
-    stroke: #fff;
   }
 
   pre.prettyprint {
