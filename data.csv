@@ -39,7 +39,7 @@ id,type,name,name_zh,confirmed,death,note
 1159320709,world,Dhekelia,,0,0,
 1159320533,world,Cyprus,賽普勒斯,0,0,
 1159320847,world,India,印度,1,0,Note test
-1159320471,world,Taiwan,台灣,10,0,
+1159320471,world,China,中华人民共和国,0,0,
 1159320895,world,Israel,以色列,0,0,
 1159320899,world,Palestine,巴勒斯坦,0,0,
 1159321013,world,Lebanon,黎巴嫩,0,0,
@@ -215,7 +215,7 @@ id,type,name,name_zh,confirmed,death,note
 1159321097,world,Aruba,阿魯巴,0,0,
 1159320415,world,Bahamas,巴哈馬,0,0,
 1159320737,world,Turks and Caicos Is.,特克斯和凱科斯群島,0,0,
-1159321335,world,Taiwan,中華民國,0,0,
+1159321335,world,Taiwan,台灣,10,0,
 1159320937,world,Japan,日本,15,0,
 1159320647,world,St. Pierre and Miquelon,聖皮埃爾和密克隆群島,0,0,
 1159320917,world,Iceland,冰島,0,0,
