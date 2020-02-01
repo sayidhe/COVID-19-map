@@ -14,8 +14,8 @@ var path = d3.geoPath()
 var svg = d3.select("#map").append("svg")
   .attr("preserveAspectRatio", "xMidYMid")
   .attr("viewBox", "0 0 " + width + " " + height)
-  .attr("width", m_width)
-  .attr("height", m_width * height / width);
+  .attr("width", '100%')
+  .attr("height", '100%');
 
 svg.append("rect")
   .attr("class", "background")
@@ -53,7 +53,7 @@ Promise.all([fetchMapData, fetchCsvData]).then(([mapData, csvData]) => {
           if (csvMap[id]) {
             return getAreaColor(csvMap[id].confirmed)
           }
-          return '#ccc'
+          return '#9b9b9b'
         })
         .attr("class", object)
         .on("mouseover", function (d) {
@@ -107,7 +107,7 @@ function getAreaColor(arg) {
       return '#ffabab'
       break
     default:
-      return '#ccc'
+      return '#9b9b9b'
   }
 }
 
