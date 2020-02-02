@@ -54,7 +54,7 @@ block mainContent
       td.death #{item.death}
 
   section#data
-    div.container
+    div.container.narrow
       div.row
         div.left
           div.header
@@ -71,6 +71,10 @@ block mainContent
                 span 例
           div.content
             table
+              tr
+                th 地區
+                th.confirmed 確診
+                th.dath 死亡
               each item in china
                 if item.type == "china"
                   +table(item)
@@ -91,6 +95,9 @@ block mainContent
           div.content
             table
               tr
+                th 地區
+                th.confirmed 確診
+                th.dath 死亡
               each item in world
                 if item.type == "world"
                   +table(item)
