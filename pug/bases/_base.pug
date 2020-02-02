@@ -5,7 +5,7 @@ html(lang="zh-Hans")
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible' content='ie=edge')
     link(href='assets/styles.css' rel='stylesheet')
-    link(href='https://fonts.googleapis.com/css?family=Noto+Serif+TC:400,700,900&display=swap' rel='stylesheet')
+    //- link(href='https://fonts.googleapis.com/css?family=Noto+Serif+TC:400,700,900&display=swap' rel='stylesheet')
     
     title Map
 
@@ -26,20 +26,26 @@ html(lang="zh-Hans")
     - var pageClass = '';
 
 
-  body(class=pageClass)
-    include /includes/_header
+  body
+    #wrapper
+      include /includes/_header
 
-    section#content
-      block mainContent
+      main.main(class=pageClass)
+        block mainContent
 
-    include /includes/_footer
+      include /includes/_footer
 
-    block modals
+      block modals
 
     //- Scripts
-    script(src="assets/libs/jquery-1.11.1.min.js")
+    script(src="assets/js/app.min.js")
+
+    //- script(src="assets/libs/jquery-1.11.1.min.js")
     script(src="assets/libs/d3.v5.min.js")
     script(src="assets/libs/topojson.v3.min.js")
     script(src="assets/libs/jquery.paroller.min.js")
+    
     script(src="assets/js/main.js")
     script(src="assets/js/paroller-page.js")
+
+    script $(document).ready(function(){Index.init()})
