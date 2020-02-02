@@ -29,10 +29,10 @@ block mainContent
         .news
           .row.justify-content-center
             .col-lg-8.col-md-10
-              h4 今日要點（點擊閱讀全文）
+              h4
+                a(href=highlight.link, target="_blank") 今日要點（點擊閱讀全文）
               ul
-                li
-                  a(href=highlight.link, target="_blank") #{highlight.text}
+                li #{highlight.text}
     section.map#map
       div.ctrl
         button(data-zoom="+1").margin-bottom-half +
@@ -47,21 +47,17 @@ block mainContent
         li > 0 例
       .scrolldown.d-sm-none
         a 查看完整數據
+
   mixin column(item)
-    if item.type === 'china'
-      .col-lg-6.col-md-12
-        span.local #{item.name_zh}
-        span.confirmed #{item.confirmed}
-        span.dead #{item.death}
-    else if item.type === 'world'
-      .col-lg-12.col-md-12
-        span.local #{item.name_zh}
-        span.confirmed #{item.confirmed}
-        span.dead #{item.death}
+    .col-lg-6.col-md-12
+      span.local #{item.name_zh}
+      span.confirmed #{item.confirmed}
+      span.dead #{item.death}
+
   section.statistic
     .container
       .row
-        .col-lg-8.col-md-6
+        .col-md-6
           .title.serif
             h3 中國大陸境內
             .info 
@@ -73,7 +69,7 @@ block mainContent
               each item in china
                 if item.type == "china"
                   +column(item)
-        .col-lg-4.col-md-6
+        .col-md-6
           .title.serif
             h3 中國大陸境外
             .info 
@@ -90,13 +86,11 @@ block mainContent
       .list
         dl
           dt 網站工程
-          dd Felix, Sayid, Elk Liang
+          dd Felix、Sayid、Elk Liang
           dt 設　　計
           dd 郭瑾燁
-          dt 圖片編輯
-          dd 陳焯煇
           dt 監　　製
-          dd 吳靖、陳莉雅
+          dd 陳莉雅、吳靖
       .share
         a.facebook(href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Ftheinitium.com%2Fproject%2F20200203-international-novel-coronavirus-live" target="_blank")
           span
