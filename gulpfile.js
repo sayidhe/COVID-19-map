@@ -63,7 +63,7 @@ function html() {
       const content = JSON.parse(
         fs.readFileSync('assets/json/content.json', 'utf8')
       );
-      console.log({...data, ...content});
+      // console.log({...data, ...content});
       return {...data, ...content};
     }))
     .pipe(pug({
