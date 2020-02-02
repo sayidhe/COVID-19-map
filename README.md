@@ -1,31 +1,27 @@
+## 运行项目
+```bash
+$ npm i
+$ npm run serve
+```
 
 ## 依赖
 
 - nodejs
-- gdal
-- topojson `npm install -g topojson`
-- http-server
+- gdal(optional)
+- topojson `npm install -g topojson`(optional)
 
-安装 `gdal`
+安装 `gdal` (optional)
 ```bash
 $ brew install gdal
 $ which ogr2ogr
 # /usr/local/bin/ogr2ogr
 ```
 
-安装 `topojson`
+安装 `topojson`(optional)
 ```bash
 $ npm install -g topojson
 $ which geo2topo
 # **/node/**/bin/geo2topo
-```
-
-安装 `http-server`
-```bash
-$ npm init
-$ npm install http-server
-$ http-server . -p 8000
-# server runs on http://127.0.0.1:8000
 ```
 
 ## 生成数据模版
@@ -41,16 +37,21 @@ $ npm run g:template
 - 用下面命令生成数据至 `assets/json/data.json`
 
 ```bash
-# 生成数据
+# 生成数据(更新时间为当前机器时间)
 $ npm run g:data
+
+# 生成数据(更新时间为指定字符串)
+$ npm run g:data 2020年2月2日21時57分
 ```
+
+## 编辑内容数据
+
+在 `assets/json/content.json` 文件中编辑即可
+
+当前该文件包括以下配置数据：
+- 今日要点
 
 ## 使用 `gulp` 来跑服务
-
-安装 `node` 模块
-```bash
-$ npm i
-```
 
 运行 `gulp` 服务
 ```bash

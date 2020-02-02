@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "serve": "gulp serve",
     "g:template": "node template.js",
     "g:data": "node data-generator.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,6 +32,7 @@
     "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
     "http-server": "^0.12.1",
+    "moment": "^2.24.0",
     "tslint": "^6.0.0",
     "typescript": "^3.7.5"
   },
