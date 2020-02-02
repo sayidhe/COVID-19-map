@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "serve": "gulp serve",
     "g:template": "node template.js",
     "g:data": "node data-generator.js",
     "test": "echo \"Error: no test specified\" && exit 1"
