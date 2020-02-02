@@ -57,11 +57,14 @@ function cleanDist() {
 function html() {
   return gulp.src(paths.html.main_pug_src)
     .pipe(data(function(file) {
-      var data = JSON.parse(
+      const data = JSON.parse(
         fs.readFileSync('assets/json/data.json', 'utf8')
       );
+      const content = JSON.parse(
+        fs.readFileSync('assets/json/content.json', 'utf8')
+      );
       // console.log(data);
-      return data;
+      return {...data, ...content};
     }))
     .pipe(pug({
       pretty: true,
