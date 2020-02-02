@@ -41,8 +41,11 @@ $ npm run g:template
 - 用下面命令生成数据至 `assets/json/data.json`
 
 ```bash
-# 生成数据
+# 生成数据(更新时间为当前机器时间)
 $ npm run g:data
+
+# 生成数据(更新时间为指定字符串)
+$ npm run g:data 2020年2月2日21時57分
 ```
 
 ## 使用 `gulp` 来跑服务
