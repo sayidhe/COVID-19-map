@@ -1,10 +1,12 @@
 var m_width = $("#map").width(),
   width = 960,
   height = 500,
+  rotate = -150,
   centered;
 
 var projection = d3.geoMercator()
-  .center([104, 36])
+  .rotate([rotate,0])
+  .center([-40, 36])
   .scale(400)
   .translate([width / 2, height / 2]);
 
