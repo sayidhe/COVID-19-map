@@ -1,5 +1,8 @@
 const fs = require('fs')
 const csv = require('csv-parser')
+const moment = require('moment')
+
+const args = process.argv.slice(2)
 
 // csv 数据缓存
 const csvData = {}
@@ -21,6 +24,7 @@ fs.createReadStream('data.csv')
   })
   .on('end', () => {
     const calculatedData = {
+      updateTime: '',
       chinaCount: {},
       worldCount: {},
       outsideChinaCount: {},
@@ -31,6 +35,9 @@ fs.createReadStream('data.csv')
     Object.keys(csvData).forEach(key => {
       calculatedData[key] = csvData[key].sort(sortArea)
     })
+
+    // 写入更新时间
+    calculatedData.updateTime = args[0] || moment().format('YYYY年M月D日HH時mm分')
 
     // 大陆数据统计
     calculatedData.chinaCount.confirmed = calculatedData.china
