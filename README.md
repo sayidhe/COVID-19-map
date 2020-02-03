@@ -61,7 +61,7 @@ $ gulp production # 部署的时候运行
 
 ## 部署
 
-- 【travis](https://travis-ci.org/)
+- [travis](https://travis-ci.org/)
 
 所需脚本:
 
@@ -71,10 +71,10 @@ $ gulp production # 部署的时候运行
 
 注意 deploy 脚本中 `git push --force --quiet "https://${git_user}:${git_password}@${git_target}" master:gh-pages > /dev/null 2>&1` , 需在 ci 中配置
 
-- git_user              # gitHub 用户名 （不是email账号）
-- git_password          # gitHub 密码
-- git_target            # dist 文件夹推送的目标 repo URL (需删除 `https://` )
-- master:gh-pages       # 将本地的 master 分支推送至 repo 的 `gh-pages` 分支（也可用 master:master）
+- `git_user`            # gitHub 用户名 （注意不是email账号）
+- `git_password`        # gitHub 密码
+- `git_target`          # 目标 repo URL (需删除 https:// )
+- `master:gh-pages`     # 推送至 gh-pages 分支
 
 部署到服务器，只需执行定时脚本 (`crontab -e`) 拉取 target repo 的对应分支即可。示例代码如下：
 
@@ -84,8 +84,8 @@ $ gulp production # 部署的时候运行
 
 整体部署流程如下：
 
-gitHub 端： `map repo 放置原编码 -> ci 侦测某个 branch -> (有 push 动作) -> 编译该 branch -> 推送 dist 文件夹至新的 repo (map-output) `
-服务器端： `git clone map-output repo -> 编写 crontab -> 1 分钟 git fetch 一次`
+- gitHub 端： `map repo 放置原编码 -> CI 侦测某个 branch -> (有 push 动作) -> 编译该 branch -> 推送 dist 文件夹至新的 repo (map-output) `
+- 服务器端： `git clone map-output repo -> 编写 crontab -> 1 分钟 git fetch 一次`
 
 
 ## 参考
