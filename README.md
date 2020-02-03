@@ -7,8 +7,8 @@ $ npm run serve
 ## 依赖
 
 - nodejs
-- gdal(optional)
-- topojson `npm install -g topojson`(optional)
+- gdal (optional 处理 geo data 用)
+- topojson `npm install -g topojson` (optional 处理 geo data 用)
 
 安装 `gdal` (optional)
 ```bash
@@ -58,6 +58,35 @@ $ npm run g:data 2020年2月2日21時57分
 $ gulp serve # 运行运行
 $ gulp production # 部署的时候运行
 ```
+
+## 部署
+
+- 【travis](https://travis-ci.org/)
+
+所需脚本:
+
+- `.travis.yml`         # travis 配置文件
+- `scripts/build.sh`    # build 文件
+- `scripts/deploy.sh`   # deploy 文件
+
+注意 deploy 脚本中 `git push --force --quiet "https://${git_user}:${git_password}@${git_target}" master:gh-pages > /dev/null 2>&1` , 需在 ci 中配置
+
+- git_user              # gitHub 用户名 （不是email账号）
+- git_password          # gitHub 密码
+- git_target            # dist 文件夹推送的目标 repo URL (需删除 `https://` )
+- master:gh-pages       # 将本地的 master 分支推送至 repo 的 `gh-pages` 分支（也可用 master:master）
+
+部署到服务器，只需执行定时脚本 (`crontab -e`) 拉取 target repo 的对应分支即可。示例代码如下：
+
+```bash
+*/1 * * * * /bin/sh -c 'cd /var/www/map-output && git fetch --all && git reset --hard origin/gh-pages'
+```
+
+整体部署流程如下：
+
+gitHub 端： `map repo 放置原编码 -> ci 侦测某个 branch -> (有 push 动作) -> 编译该 branch -> 推送 dist 文件夹至新的 repo (map-output) `
+服务器端： `git clone map-output repo -> 编写 crontab -> 1 分钟 git fetch 一次`
+
 
 ## 参考
 
