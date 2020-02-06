@@ -10,18 +10,18 @@
     pointer-events: all;
   }
 
-  #countries, #states {
+  #countries, #states, #zh-hkg-mac, #sgp {
     fill: #777;
     stroke: #686868;
     stroke-linejoin: round;
     stroke-linecap: round;
   }
 
-  #countries {
+  #countries, #sgp {
     stroke-width: .5;
   }
 
-  #states {
+  #states, #zh-hkg-mac {
     stroke-width: .1;
   }
 
