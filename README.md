@@ -59,6 +59,82 @@ $ gulp serve # 运行运行
 $ gulp production # 部署的时候运行
 ```
 
+## 地图生成
+
+**1. 下载地图**
+
+[Nature earth](http://www.naturalearthdata.com/downloads/10m-cultural-vectors/) 下载 1:10m 的地图
+
+- 国家：[Download countries](http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip) (5.11 MB) version 3.1.0
+- 省：[Download states and provinces](http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_1_states_provinces.zip) (13.97 MB) version 3.0.0
+
+下载后解压缩可以看到多种数据格式，我们需要 .shp 文件。
+
+也就是这两个文件：
+- ne_10m_admin_0_countries.shp【8.8M】
+- ne_10m_admin_1_states_provinces.shp【21.6M】
+
+
+**2. 转换坐标文件**
+
+下载的文件包含全球所有国家和地区，我们现在只需要世界地图和中国的省份地图数据。
+
+国家代号参考： [Countries or areas / geographical regions](https://unstats.un.org/unsd/methodology/m49/)
+
+现在需要用到 `Geospatial Data Abstraction Library – GDAL` 的 `ogr2ogr` 工具把 `.shp` 文件转换为 `GeoJSON`。
+
+```bash
+$ brew install gdal
+```
+
+安装后运行：
+
+`ne_10m_admin_0_countries.shp` 国家文件
+
+```bash
+# ogr2ogr -f GeoJSON -where "SU_A3 ＝ 'CHN' OR SU_A3='TWN'" countries.json ne_10m_admin_0_countries.shp
+# ogr2ogr -f GeoJSON -where "SU_A3='TWN'" twn_geo.json ne_10m_admin_0_countries.shp
+$ ogr2ogr -f GeoJSON countries_geo.json ne_10m_admin_0_countries.shp
+```
+
+香港和澳门
+```bash
+$ ogr2ogr -f GeoJSON -where "ADM0_A3 IN ('HKG','MAC')" zh-hkg-mac_geo.json ne_10m_admin_0_countries.shp
+```
+
+`ne_10m_admin_1_states_provinces.shp` 省文件
+
+```bash
+$ ogr2ogr -f GeoJSON -where "gu_a3 = 'CHN'" states_geo.json ne_10m_admin_1_states_provinces.shp
+```
+
+**3. 压缩坐标文件**
+
+但是有个问题，经过上面转换后，文件尺寸有
+
+countries_geo.json [25MB]
+states_geo.json [2.6MB]
+zh-hkg-mac_geo.json
+
+使用 http://www.mapshaper.org/ 进行地图的精度调整，最终导出 `GeoJSON` 文件。
+
+`countries.json`, `states.json`, `zh-hkg-mac.json`
+
+使用 `topojson` 进一步去除不必要的信息
+
+安装：
+```bash
+$ npm install -g topojson
+```
+
+处理：
+```bash
+$ geo2topo --id-property SU_A3 -p name=NAME -p name -o countries_topo.json countries.json
+$ geo2topo --id-property SU_A3 -p name=NAME -p name -o zh-hkg-mac_topo.json zh-hkg-mac.json
+$ geo2topo --id-property adm1_cod_1 -p name -o states_topo.json states.json
+```
+
+
 ## 部署
 
 - [travis](https://travis-ci.org/)
