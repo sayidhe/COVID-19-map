@@ -112,11 +112,11 @@ $ ogr2ogr -f GeoJSON -where "gu_a3 = 'CHN'" states_geo.json ne_10m_admin_1_state
 
 但是有个问题，经过上面转换后，文件尺寸有
 
-countries_geo.json [25MB]
-states_geo.json [2.6MB]
-zh-hkg-mac_geo.json
+- countries_geo.json [25MB]
+- states_geo.json [2.6MB]
+- zh-hkg-mac_geo.json
 
-使用 http://www.mapshaper.org/ 进行地图的精度调整，最终导出 `GeoJSON` 文件。
+使用 [mapshaper.org](http://www.mapshaper.org/) 进行地图的精度调整，最终导出 `GeoJSON` 文件。
 
 `countries.json`, `states.json`, `zh-hkg-mac.json`
 
@@ -163,8 +163,11 @@ $ geo2topo --id-property adm1_cod_1 -p name -o states_topo.json states.json
 - gitHub 端： `map repo 放置原编码 -> CI 侦测某个 branch -> (有 push 动作) -> 编译该 branch -> 推送 dist 文件夹至新的 repo (map-output) `
 - 服务器端： `git clone map-output repo -> 编写 crontab -> 1 分钟 git fetch 一次`
 
+预览地址： https://github.sayidhe.com/map-output/
 
 ## 参考
 
 - [Let’s Make a Map](https://bost.ocks.org/mike/map/)
 - [用 d3.js 生成可以互动的中国地图](https://yukun.im/javascript/533)
+- [Making a Map in D3.js v.5](http://datawanderings.com/2018/10/28/making-a-map-in-d3-js-v-5/)
+- [D3js中文文档 D3中文](https://github.com/xswei/d3js_doc)
